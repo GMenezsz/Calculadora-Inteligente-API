@@ -5,7 +5,9 @@ from fastapi.middleware.cors import CORSMiddleware
 app = FastAPI(title="Calculadora Inteligente")
 
 app.include_router(rotas)
-
+@app.get("/")
+def read_root():
+    return {"message": "API rodando!"}
 app.add_middleware(
     CORSMiddleware,
     allow_origins=["*"],  
