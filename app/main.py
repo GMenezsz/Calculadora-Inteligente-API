@@ -1,28 +1,19 @@
-from fastapi import FastAPI, Request, Response
+from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
 app = FastAPI(title="Calculadora Inteligente")
 
+# Configuração robusta padrão do FastAPI para CORS
+origins = ["*"]
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],
+    allow_origins=origins,
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
+    expose_headers=["*"],
 )
-
-
-async def add_cors_headers(request: Request, call_next):
-    if request.method == "OPTIONS":
-        response = Response(status_code=200)
-    else:
-        response = await call_next(request)
-    
-    response.headers["Access-Control-Allow-Origin"] = "*"
-    response.headers["Access-Control-Allow-Methods"] = "*"
-    response.headers["Access-Control-Allow-Headers"] = "*"
-    return response
 
 from app.routers.gastos import router as router_gastos
 from app.routers.media import router as router_media
