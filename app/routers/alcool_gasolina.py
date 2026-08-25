@@ -1,15 +1,22 @@
-from calculadora import *
 from fastapi import APIRouter, HTTPException
+from pydantic import BaseModel
+from calculadora import *
 
 router = APIRouter()
 
-@router.post("/calculadora_alcool_gasolina")
-def api_alcool_gasolina(valor_alcool: float, valor_gasolina: float):
+class AlcoolGasolinaRequest(BaseModel):
+    valor_alcool: float
+    valor_gasolina: float
 
-    if validar_alcool(valor_alcool) is not True:
+@router.post("/calculadora_alcool_gasolina")
+def api_alcool_gasolina(dados: AlcoolGasolinaRequest):
+    if validar_alcool(dados.valor_alcool) is not True:
         raise HTTPException(status_code=400, detail="Valores inválidos.")
-    elif validar_gasolina(valor_gasolina) is not True:
+    elif validar_gasolina(dados.valor_gasolina) is not True:
         raise HTTPException(status_code=400, detail="Valores inválidos.")
     else:
-        resultado = calcular_alcool_gasolina(preco_alcool=valor_alcool, preco_gasolina=valor_gasolina)
+        resultado = calcular_alcool_gasolina(
+            preco_alcool=dados.valor_alcool, 
+            preco_gasolina=dados.valor_gasolina
+        )
         return {"resultado": resultado}
