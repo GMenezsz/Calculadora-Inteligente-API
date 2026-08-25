@@ -1,27 +1,34 @@
 from fastapi import APIRouter, HTTPException
-from typing import  Optional
+from typing import Optional
+from pydantic import BaseModel
 from calculadora import *
 
 router = APIRouter()
 
-@router.post("/Calculadora_financiamento")
-def api_calculadora(valor: float, taxa_juros: float, ano: int, valor_entrada: Optional[float] = 0):
+class FinanciamentoRequest(BaseModel):
+    valor: float
+    taxa_juros: float
+    ano: int
+    valor_entrada: Optional[float] = 0
 
-
-    if validar_valor(valor) is not True:
+@router.post("/calculadora_financiamento")
+def api_calculadora(dados: FinanciamentoRequest):
+    if validar_valor(dados.valor) is not True:
         raise HTTPException(status_code=400, detail="Valores inválidos.")
 
-    if valor_entrada is None:
-        valor_entrada = 0
+    entrada = 0 if dados.valor_entrada is None else dados.valor_entrada
 
-    elif validar_entrada(valor, valor_entrada) is not True:
+    if dados.valor_entrada is not None and validar_entrada(dados.valor, dados.valor_entrada) is not True:
         raise HTTPException(status_code=400, detail="Valores inválidos.") 
-
-    elif validar_juros(taxa_juros) is not True:
+    elif validar_juros(dados.taxa_juros) is not True:
         raise HTTPException(status_code=400, detail="Valores inválidos.")
-
-    elif validar_prazo(ano * 12) is not True:
+    elif validar_prazo(dados.ano * 12) is not True:
         raise HTTPException(status_code=400, detail="Valores inválidos.")
     else:
-        resultado = calcular_financiamento(valor_produto=valor , taxa_juros=taxa_juros, anos=ano, valor_entrada=valor_entrada)
+        resultado = calcular_financiamento(
+            valor_produto=dados.valor, 
+            taxa_juros=dados.taxa_juros, 
+            anos=dados.ano, 
+            valor_entrada=entrada
+        )
         return {"resultado": resultado}
