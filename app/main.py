@@ -45,6 +45,6 @@ app.include_router(router_autonomos)
 app.include_router(router_regra_tres)
 app.include_router(router_alcool_gasolina)
 
-@app.get("/")
-def read_root():
-    return {"message": "API rodando!"}
+@app.get("/health")
+def health_check():
+  return {"status": "ok", "message": "API está ativa e operando!"}
