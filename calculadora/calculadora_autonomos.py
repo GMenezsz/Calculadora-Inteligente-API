@@ -92,7 +92,7 @@ def validar_taxa_maquininha(taxa_maquininha: Optional[float]) -> bool:
     if not taxa_maquininha:
         return True
     for taxa in taxa_maquininha:
-        if taxa < 0:
+    if taxa < 0:
         return False
     else:
         return True
