@@ -6,10 +6,10 @@ from calculadora import *
 router = APIRouter()
 
 class AutonomosRequest(BaseModel):
-    custos_operacionais: List[float]
     horas_trabalho: float
     valor_hora: float
     margem_lucro: float
+    custos_operacionais: Optional [List[float]] = None
     taxa_maquininha: Optional[float] = None
     deslocamento: Optional[List[float]] = None
     custo_insumos: Optional[List[float]] = None
