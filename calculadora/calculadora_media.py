@@ -38,16 +38,17 @@ def situacao_academica(nota_final: float):
         return "Aluno reprovado / recuperação"
 
 def validar_parcial(prova_parcial: float):
-    if prova_parcial < 0:
-        return False
-    else:
-        return True
+  if prova_parcial < 0 or prova_parcial > 10:
+    return False
+  else:
+    return True
+
 
 def validar_global(prova_global: float):
-    if prova_global < 0:
-        return False
-    else:
-        return True
+  if prova_global < 0 or prova_global > 10:
+    return False
+  else:
+    return True
 
 def validar_pontos_extras(pontos_extras: Optional[List[float]]) -> bool:
     if not pontos_extras:
