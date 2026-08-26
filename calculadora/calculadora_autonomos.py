@@ -1,34 +1,27 @@
-from typing import List, Optional
+from typing import Optional
 
 def calcular_custos(
     horas_trabalho: float, 
     valor_hora: float, 
     margem_lucro: float, 
-    custos_operacionais: Optional[List[float]] = None, 
-    taxa_maquininha: Optional[float] = None, 
-    deslocamento: Optional[List[float]] = None, 
-    custo_insumos: Optional[List[float]] = None
+    custos_operacionais: Optional[float] = 0.0, 
+    taxa_maquininha: Optional[float] = 0.0, 
+    deslocamento: Optional[float] = 0.0, 
+    custo_insumos: Optional[float] = 0.0
 ):
 
-    if custos_operacionais is None:
-        custos_operacionais = [0.0]
-    if deslocamento is None:
-        deslocamento = [0.0]
-    if custo_insumos is None:
-        custo_insumos = [0.0]
-    if taxa_maquininha is None:
-        taxa_maquininha = 0.0
+    custos_operacionais = custos_operacionais or 0.0
+    deslocamento = deslocamento or 0.0
+    custo_insumos = custo_insumos or 0.0
+    taxa_maquininha = taxa_maquininha or 0.0
 
-    total_operacional = sum(custos_operacionais)
-    total_deslocamento = sum(deslocamento)
-    total_insumos = sum(custo_insumos)
     total_mao_de_obra = horas_trabalho * valor_hora
 
-    custo_total = total_operacional + total_deslocamento + total_insumos + total_mao_de_obra
+    custo_total = custos_operacionais + deslocamento + custo_insumos + total_mao_de_obra
 
     fator_preco = 1 - (margem_lucro / 100) - (taxa_maquininha / 100)
     if fator_preco <= 0:
-        fator_preco = 0.01  # Segurança matemática
+        fator_preco = 0.01  # Segurança contra divisão por zero
 
     preco_sugerido = custo_total / fator_preco 
     
@@ -39,7 +32,6 @@ def calcular_custos(
         "preco_sugerido_R$": round(preco_sugerido, 2),
         "lucro_R$": round(lucro, 2),
     }
-
 def validar_horas_trabalho(horas_trabalho: float):
     if horas_trabalho < 0:
         return False
