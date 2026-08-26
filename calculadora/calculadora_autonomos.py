@@ -1,7 +1,17 @@
 from typing import List, Optional
 
-def calcular_custos(horas_trabalho: float, valor_hora: float, margem_lucro: float, custos_operacionais: Optional[List[float]] = None, taxa_maquininha: Optional[float] = None, deslocamento: Optional[List[float]] = None, custo_insumos: Optional[list[float]] = None):
-
+def calcular_custos(
+    horas_trabalho: float, 
+    valor_hora: float, 
+    margem_lucro: float, 
+    custos_operacionais: Optional[List[float]] = None, 
+    taxa_maquininha: Optional[float] = None, 
+    deslocamento: Optional[List[float]] = None, 
+    custo_insumos: Optional[List[float]] = None
+):
+    # Validação da margem de lucro
+    if margem_lucro < 0 or margem_lucro >= 100:
+        raise ValueError("A margem de lucro deve ser entre 0 e 99.99%")
 
     if custos_operacionais is None:
         custos_operacionais = [0.0]
@@ -19,10 +29,14 @@ def calcular_custos(horas_trabalho: float, valor_hora: float, margem_lucro: floa
 
     custo_total = total_operacional + total_deslocamento + total_insumos + total_mao_de_obra
 
+    # Correção: validar se o fator não é zero ou negativo
     fator_preco = 1 - (margem_lucro / 100) - (taxa_maquininha / 100)
+    
+    if fator_preco <= 0:
+        raise ValueError(f"A combinação de margem de lucro ({margem_lucro}%) e taxa da maquininha ({taxa_maquininha}%) resulta em fator inválido")
+    
     preco_sugerido = custo_total / fator_preco 
     lucro = preco_sugerido * (margem_lucro / 100) 
-
 
     return {
         "custo_total_R$": round(custo_total, 2),
