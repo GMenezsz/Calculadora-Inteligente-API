@@ -16,13 +16,13 @@ class AutonomosRequest(BaseModel):
 
 @router.post("/calculadora_autonomos")
 def api_calculadora_autonomos(dados: AutonomosRequest):
-    if validar_custos_operacionais(dados.custos_operacionais) is not True:
-        raise HTTPException(status_code=400, detail="Valores inválidos.")
-    elif validar_horas_trabalho(dados.horas_trabalho) is not True:
+    if validar_horas_trabalho(dados.horas_trabalho) is not True:
         raise HTTPException(status_code=400, detail="Valores inválidos.")
     elif validar_valor_hora(dados.valor_hora) is not True:
         raise HTTPException(status_code=400, detail="Valores inválidos.")
     elif validar_margem_lucro(dados.margem_lucro) is not True:
+        raise HTTPException(status_code=400, detail="Valores inválidos.")
+    elif validar_custos_operacionais(dados.custos_operacionais) is not True:
         raise HTTPException(status_code=400, detail="Valores inválidos.")
     elif validar_taxa_maquininha(dados.taxa_maquininha) is not True:
         raise HTTPException(status_code=400, detail="Valores inválidos.")
