@@ -1,8 +1,17 @@
 from typing import List, Optional
 
-def calcular_custos(horas_trabalho: float, valor_hora: float, margem_lucro: float, custos_operacionais: Optional [List[float]] = None, taxa_maquininha: Optional [float] = None, deslocamento: Optional [list[float]] = None, custo_insumos: Optional [list[float]] = None):
+def calcular_custos(
+    horas_trabalho: float, 
+    valor_hora: float, 
+    margem_lucro: float, 
+    custos_operacionais: Optional[List[float]] = None, 
+    taxa_maquininha: Optional[float] = None, 
+    deslocamento: Optional[List[float]] = None, 
+    custo_insumos: Optional[List[float]] = None
+):
 
-
+    if custos_operacionais is None:
+        custos_operacionais = [0.0]
     if deslocamento is None:
         deslocamento = [0.0]
     if custo_insumos is None:
@@ -18,9 +27,12 @@ def calcular_custos(horas_trabalho: float, valor_hora: float, margem_lucro: floa
     custo_total = total_operacional + total_deslocamento + total_insumos + total_mao_de_obra
 
     fator_preco = 1 - (margem_lucro / 100) - (taxa_maquininha / 100)
-    preco_sugerido = custo_total / fator_preco 
-    lucro = preco_sugerido * (margem_lucro / 100) 
+    if fator_preco <= 0:
+        fator_preco = 0.01  # Segurança matemática
 
+    preco_sugerido = custo_total / fator_preco 
+    
+    lucro = preco_sugerido - custo_total 
 
     return {
         "custo_total_R$": round(custo_total, 2),
