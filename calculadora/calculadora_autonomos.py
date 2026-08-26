@@ -9,7 +9,6 @@ def calcular_custos(
     deslocamento: Optional[List[float]] = None, 
     custo_insumos: Optional[List[float]] = None
 ):
-    # Validação da margem de lucro
     if margem_lucro < 0 or margem_lucro >= 100:
         raise ValueError("A margem de lucro deve ser entre 0 e 99.99%")
 
@@ -29,7 +28,6 @@ def calcular_custos(
 
     custo_total = total_operacional + total_deslocamento + total_insumos + total_mao_de_obra
 
-    # Correção: validar se o fator não é zero ou negativo
     fator_preco = 1 - (margem_lucro / 100) - (taxa_maquininha / 100)
     
     if fator_preco <= 0:
@@ -66,7 +64,7 @@ def validar_deslocamento(deslocamento: List[float]):
     if not deslocamento:
         return True
     for custo in deslocamento:
-        if custo < 0:
+        if custo <= 0:
             return False
     else:
         return True
