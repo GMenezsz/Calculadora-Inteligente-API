@@ -33,7 +33,7 @@ def resultado_quilometragem(ganhos_km: float):
     elif ganhos_km >= 1.80:
         return "A quilometragem está boa."
     else:
-        return "A quilometragem está ruim."
+        return "A quilometragem está baixa."
 
 
 def validar_distancia(distancia: float):
