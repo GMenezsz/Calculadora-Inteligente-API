@@ -25,13 +25,13 @@ def validar_valor(valor):
         return True
 
 def validar_juros(taxa_juros):
-    if taxa_juros < 0:
+    if taxa_juros <= 0:
         return False
     else:
         return True
     
 def validar_entrada(valor_produto, valor_entrada):
-    if valor_entrada < 0:
+    if valor_entrada <= 0:
         return False
     
     elif valor_entrada >= valor_produto:
@@ -41,7 +41,7 @@ def validar_entrada(valor_produto, valor_entrada):
         return True
 
 def validar_prazo(anos):
-    if anos < 1:
+    if anos <= 0:
         return False
     else: 
         return True
