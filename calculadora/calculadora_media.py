@@ -31,6 +31,12 @@ def calcular_media_ponderada(
       "situacao": status_aluno,
   }
 
+def situacao_academica(nota_final: float):
+    if nota_final >= 6.0:
+        return "Aluno aprovado"
+    else:
+        return "Aluno reprovado / recuperação"
+
 def validar_parcial(prova_parcial: float):
     if prova_parcial < 0:
         return False
