@@ -64,8 +64,8 @@ def validar_deslocamento(deslocamento: Optional[list[float]]) -> bool:
     if not deslocamento:
         return True
     for custo in deslocamento:
-        if custo <= 0:
-            return False
+    if custo <= 0:
+        return False
     else:
         return True
     
@@ -74,8 +74,8 @@ def validar_custo_insumos(custo_insumos: Optional[list[float]]) -> bool:
     if not custo_insumos:
         return True
     for custo in custo_insumos:
-        if custo <= 0:
-            return False
+    if custo <= 0:
+        return False
     else:
         return True
 
@@ -83,8 +83,8 @@ def validar_custos_operacionais(custos_operacionais: Optional[list[float]]) -> b
     if not custos_operacionais:
         return True
     for custo in custos_operacionais:
-        if custo <= 0:
-            return False
+    if custo <= 0:
+        return False
     else:
         return True
 
