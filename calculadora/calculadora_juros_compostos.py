@@ -24,25 +24,25 @@ def calculadora_juros_compostos(valor_inicial, aporte_mensal, taxa_juros, period
     }
 
 def validar_valor_inicial(valor_inicial):
-    if valor_inicial < 0:
+    if valor_inicial <= 0:
         return False
     else:
         return True
 
 def validar_aporte_mensal(aporte_mensal):
-    if aporte_mensal < 0:
+    if aporte_mensal <= 0:
         return False
     else:
         return True
 
 def validar_taxa_juros(taxa_juros):
-    if taxa_juros < 0:
+    if taxa_juros <= 0:
         return False
     else:
         return True
 
 def validar_periodo_anos(periodo_anos):
-    if periodo_anos < 0:
+    if periodo_anos <= 0:
         return False
     else:
         return True
