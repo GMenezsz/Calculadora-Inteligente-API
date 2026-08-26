@@ -10,23 +10,18 @@ def calcular_media_ponderada(
     media_trabalhos = sum(trabalhos) / len(trabalhos)
   else:
     media_trabalhos = 0.0
-
-  # 2. Soma dos pontos extras
   if pontos_extras:
     total_pontos_extras = sum(pontos_extras)
   else:
     total_pontos_extras = 0.0
 
-  # 3. Média base das provas
   nota_base_provas = (prova_parcial + prova_global) / 2
 
-  # 4. Aplicação dos pesos (Exemplo: Provas valem 60% / 0.6 e Trabalhos valem 40% / 0.4)
   if trabalhos:
     nota_final = (nota_base_provas * 0.6) + (media_trabalhos * 0.4)
   else:
     nota_final = nota_base_provas
 
-  # Adiciona os pontos extras e garante que a nota final não passe de 10
   nota_final = min(nota_final + total_pontos_extras, 10.0)
 
   status_aluno = situacao_academica(nota_final)
