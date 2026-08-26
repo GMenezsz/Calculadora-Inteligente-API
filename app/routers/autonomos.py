@@ -32,12 +32,12 @@ def api_calculadora_autonomos(dados: AutonomosRequest):
         raise HTTPException(status_code=400, detail="Valores inválidos.")
     else:
         resultado = calcular_custos(
+            horas_trabalho=dados.horas_trabalho,           
+            valor_hora=dados.valor_hora,                   
+            margem_lucro=dados.margem_lucro,               
             custos_operacionais=dados.custos_operacionais, 
-            horas_trabalho=dados.horas_trabalho, 
-            valor_hora=dados.valor_hora, 
-            margem_lucro=dados.margem_lucro, 
-            taxa_maquininha=dados.taxa_maquininha, 
-            deslocamento=dados.deslocamento, 
-            custo_insumos=dados.custo_insumos
+            taxa_maquininha=dados.taxa_maquininha,         
+            deslocamento=dados.deslocamento,               
+            custo_insumos=dados.custo_insumos              
         )
         return {"resultado": resultado}
