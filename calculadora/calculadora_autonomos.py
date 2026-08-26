@@ -88,7 +88,7 @@ def validar_custos_operacionais(custos_operacionais: Optional[list[float]]) -> b
     else:
         return True
 
-def validar_taxa_maquininha(taxa_maquininha: Optional[list[float]]) -> bool:
+def validar_taxa_maquininha(taxa_maquininha: Optional[float]]) -> bool:
     if taxa_maquininha <= 0:
         return False
     else:
