@@ -40,8 +40,8 @@ def validar_entrada(valor_produto, valor_entrada):
     else:
         return True
 
-def validar_prazo(meses):
-    if meses < 1:
+def validar_prazo(anos):
+    if anos < 1:
         return False
     else: 
         return True
