@@ -22,7 +22,7 @@ def api_calculadora_media(dados: MediaRequest):
     elif validar_pontos_extras(dados.pontos_extras) is not True:
         raise HTTPException(status_code=400, detail="Valores inválidos.")
     else:
-        resultado = calcular_media(
+        resultado = calcular_media_ponderada(
             prova_parcial=dados.prova_parcial, 
             prova_global=dados.prova_global, 
             trabalhos=dados.trabalhos, 
