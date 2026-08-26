@@ -43,19 +43,19 @@ def calcular_custos(
     }
 
 def validar_horas_trabalho(horas_trabalho: float):
-    if horas_trabalho <= 0:
+    if horas_trabalho < 0:
         return False
     else:
         return True
 
 def validar_valor_hora(valor_hora: float):
-    if valor_hora <= 0:
+    if valor_hora < 0:
         return False
     else:
         return True
 
 def validar_margem_lucro(margem_lucro: float):
-    if margem_lucro <= 0:
+    if margem_lucro < 0:
         return False
     else:
         return True
