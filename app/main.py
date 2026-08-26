@@ -45,6 +45,6 @@ app.include_router(router_autonomos)
 app.include_router(router_regra_tres)
 app.include_router(router_alcool_gasolina)
 
-@app.get("/health")
+@app.api_route("/health", methods=["GET", "HEAD"])
 def health_check():
     return {"status": "ok"}
