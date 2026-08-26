@@ -45,19 +45,19 @@ def calcular_custos(
     }
 
 def validar_horas_trabalho(horas_trabalho: float):
-    if horas_trabalho < 0:
+    if horas_trabalho <= 0:
         return False
     else:
         return True
 
 def validar_valor_hora(valor_hora: float):
-    if valor_hora < 0:
+    if valor_hora <= 0:
         return False
     else:
         return True
 
 def validar_margem_lucro(margem_lucro: float):
-    if margem_lucro < 0:
+    if margem_lucro <= 0:
         return False
     else:
         return True
@@ -76,7 +76,7 @@ def validar_custo_insumos(custo_insumos: List[float]):
     if not custo_insumos:
         return True
     for custo in custo_insumos:
-        if custo < 0:
+        if custo <= 0:
             return False
     else:
         return True
@@ -85,13 +85,13 @@ def validar_custos_operacionais(custos_operacionais: List[float]):
     if not custos_operacionais:
         return True
     for custo in custos_operacionais:
-        if custo < 0:
+        if custo <= 0:
             return False
     else:
         return True
 
 def validar_taxa_maquininha(taxa_maquininha: float):
-    if taxa_maquininha < 0:
+    if taxa_maquininha <= 0:
         return False
     else:
         return True
