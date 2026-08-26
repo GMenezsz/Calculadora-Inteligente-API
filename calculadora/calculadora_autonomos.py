@@ -60,39 +60,34 @@ def validar_margem_lucro(margem_lucro: float):
     else:
         return True
 
-def validar_deslocamento(deslocamento: Optional[list[float]]) -> bool:
-    if not deslocamento:
+def validar_deslocamento(deslocamento: Optional[List[float]]) -> bool:
+    if deslocamento is None or not deslocamento:
         return True
     for custo in deslocamento:
-    if custo <= 0:
-        return False
-    else:
-        return True
+        if custo < 0:
+            return False
+    return True
     
 
-def validar_custo_insumos(custo_insumos: Optional[list[float]]) -> bool:
-    if not custo_insumos:
+def validar_custo_insumos(custo_insumos: Optional[List[float]]) -> bool:
+    if custo_insumos is None or not custo_insumos:
         return True
     for custo in custo_insumos:
-    if custo <= 0:
-        return False
-    else:
-        return True
+        if custo < 0:
+            return False
+    return True
 
-def validar_custos_operacionais(custos_operacionais: Optional[list[float]]) -> bool:
-    if not custos_operacionais:
+def validar_custos_operacionais(custos_operacionais: Optional[List[float]]) -> bool:
+    if custos_operacionais is None or not custos_operacionais:
         return True
     for custo in custos_operacionais:
-    if custo <= 0:
-        return False
-    else:
-        return True
+        if custo < 0:
+            return False
+    return True
 
 def validar_taxa_maquininha(taxa_maquininha: Optional[float]) -> bool:
-    if not taxa_maquininha:
+    if taxa_maquininha is None:
         return True
-    for taxa in taxa_maquininha:
-    if taxa < 0:
+    if taxa_maquininha < 0:
         return False
-    else:
-        return True
+    return True
