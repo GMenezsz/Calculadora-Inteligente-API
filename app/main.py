@@ -47,4 +47,4 @@ app.include_router(router_alcool_gasolina)
 
 @app.get("/health")
 def health_check():
-  return {"status": "ok", "message": "API está ativa e operando!"}
+    return {"status": "ok"}
