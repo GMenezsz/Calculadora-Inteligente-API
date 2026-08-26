@@ -6,7 +6,6 @@ def calcular_media_ponderada(
     trabalhos: Optional[list[float]] = None,
     pontos_extras: Optional[list[float]] = None,
 ):
-  # 1. Soma e média dos trabalhos (se existirem)
   if trabalhos:
     media_trabalhos = sum(trabalhos) / len(trabalhos)
   else:
