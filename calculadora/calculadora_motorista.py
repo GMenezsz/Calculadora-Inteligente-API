@@ -37,25 +37,25 @@ def resultado_quilometragem(ganhos_km: float):
 
 
 def validar_distancia(distancia: float):
-    if distancia < 0:
+    if distancia <= 0:
         return False
     else:
         return True
 
 def validar_ganhos(ganhos: float):
-    if ganhos < 0:
+    if ganhos <= 0:
         return False
     else:
         return True
 
 def validar_consumo_veiculo(consumo_veiculo: float):
-    if consumo_veiculo < 0:
+    if consumo_veiculo <= 0:
         return False
     else:
         return True
 
 def validar_valor_combustivel(valor_combustivel: float):
-    if valor_combustivel < 0:
+    if valor_combustivel <= 0:
         return False
     else:
         return True
@@ -63,7 +63,7 @@ def validar_valor_combustivel(valor_combustivel: float):
 def validar_alimentacao(alimentacao: Optional[float]):
     if alimentacao is None:
         return True
-    elif alimentacao < 0:
+    elif alimentacao <= 0:
         return False
     else:
         return True
@@ -71,7 +71,7 @@ def validar_alimentacao(alimentacao: Optional[float]):
 def validar_cafe(cafe: Optional[float]):
     if cafe is None:
         return True
-    elif cafe < 0:
+    elif cafe <= 0:
         return False
     else:
         return True
@@ -79,7 +79,7 @@ def validar_cafe(cafe: Optional[float]):
 def validar_outros_gastos(outros_gastos: Optional[float]):
     if outros_gastos is None:
         return True
-    elif outros_gastos < 0:
+    elif outros_gastos <= 0:
         return False
     else:
         return True
