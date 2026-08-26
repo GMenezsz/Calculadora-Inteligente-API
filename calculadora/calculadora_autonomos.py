@@ -1,6 +1,6 @@
 from typing import List, Optional
 
-def calcular_custos(custos_operacionais: List[float], horas_trabalho: float, valor_hora: float, margem_lucro: float, taxa_maquininha: Optional [float] = None, deslocamento: Optional [list[float]] = None, custo_insumos: Optional [list[float]] = None):
+def calcular_custos(horas_trabalho: float, valor_hora: float, margem_lucro: float, custos_operacionais: Optional [List[float]] = None, taxa_maquininha: Optional [float] = None, deslocamento: Optional [list[float]] = None, custo_insumos: Optional [list[float]] = None):
 
 
     if deslocamento is None:
