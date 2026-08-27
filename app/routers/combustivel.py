@@ -13,14 +13,14 @@ class CombustivelRequest(BaseModel):
 def api_calculadora_combustivel(dados: CombustivelRequest):
     if validar_distancia(dados.distancia) is not True:
         raise HTTPException(status_code=400, detail="Valores inválidos.")
-    elif validar_consumo_medio_kml(dados.consumo_medio_kml) is not True:
+    if validar_consumo_medio_kml(dados.consumo_medio_kml) is not True:
         raise HTTPException(status_code=400, detail="Valores inválidos.")
-    elif validar_valor_combustivel(dados.valor_combustivel) is not True:
+    if validar_valor_combustivel(dados.valor_combustivel) is not True:
         raise HTTPException(status_code=400, detail="Valores inválidos.")
-    else:
-        resultado = calcular_consumo_combustivel(
-            distancia=dados.distancia, 
-            consumo_medio_kml=dados.consumo_medio_kml, 
-            valor_combustivel=dados.valor_combustivel
-        )
-        return {"resultado": resultado}
+    
+    resultado = calcular_consumo_combustivel(
+        distancia=dados.distancia, 
+        consumo_medio_kml=dados.consumo_medio_kml, 
+        valor_combustivel=dados.valor_combustivel
+    )
+    return {"resultado": resultado}
