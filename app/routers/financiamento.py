@@ -17,18 +17,20 @@ def api_calculadora(dados: FinanciamentoRequest):
         raise HTTPException(status_code=400, detail="Valores inválidos.")
 
     entrada = 0 if dados.valor_entrada is None else dados.valor_entrada
-
-    if dados.valor_entrada is not None and validar_entrada(dados.valor, dados.valor_entrada) is not True:
-        raise HTTPException(status_code=400, detail="Valores inválidos.")  
+    
+    if entrada > 0 and validar_entrada(dados.valor, entrada) is not True:
+        raise HTTPException(status_code=400, detail="Valores inválidos.")
+        
     if validar_juros(dados.taxa_juros) is not True:
         raise HTTPException(status_code=400, detail="Valores inválidos.")
+        
     if validar_prazo(dados.ano * 12) is not True:
         raise HTTPException(status_code=400, detail="Valores inválidos.")
-    
+
     resultado = calcular_financiamento(
-        valor_produto=dados.valor, 
-        taxa_juros=dados.taxa_juros, 
-        anos=dados.ano, 
+        valor_produto=dados.valor,
+        taxa_juros=dados.taxa_juros,
+        anos=dados.ano,
         valor_entrada=entrada
     )
     return {"resultado": resultado}
