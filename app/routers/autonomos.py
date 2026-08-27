@@ -16,6 +16,7 @@ class AutonomosRequest(BaseModel):
 
 @router.post("/calculadora_autonomos")
 def api_calculadora_autonomos(dados: AutonomosRequest):
+    
     if validar_horas_trabalho(dados.horas_trabalho) is not True:
         raise HTTPException(status_code=400, detail="Valores inválidos.")
         
