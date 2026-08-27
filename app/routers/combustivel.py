@@ -11,6 +11,7 @@ class CombustivelRequest(BaseModel):
 
 @router.post("/calculadora_combustivel")
 def api_calculadora_combustivel(dados: CombustivelRequest):
+    
     if validar_distancia(dados.distancia) is not True:
         raise HTTPException(status_code=400, detail="Valores inválidos.")
         
