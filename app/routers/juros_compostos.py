@@ -12,19 +12,23 @@ class JurosCompostosRequest(BaseModel):
 
 @router.post("/calculadora_juros_compostos")
 def api_calculadora_juros_compostos(dados: JurosCompostosRequest):
+    
     if validar_valor_inicial(dados.valor_inicial) is not True:
         raise HTTPException(status_code=400, detail="Valores inválidos.")
-    elif validar_aporte_mensal(dados.aporte_mensal) is not True:
+        
+    if validar_aporte_mensal(dados.aporte_mensal) is not True:
         raise HTTPException(status_code=400, detail="Valores inválidos.")
-    elif validar_taxa_juros(dados.taxa_juros) is not True:
+        
+    if validar_taxa_juros(dados.taxa_juros) is not True:
         raise HTTPException(status_code=400, detail="Valores inválidos.")
-    elif validar_periodo_anos(dados.periodo_anos) is not True:
+        
+    if validar_periodo_anos(dados.periodo_anos) is not True:
         raise HTTPException(status_code=400, detail="Valores inválidos.")
-    else:
-        resultado = calculadora_juros_compostos(
-            valor_inicial=dados.valor_inicial, 
-            aporte_mensal=dados.aporte_mensal, 
-            taxa_juros=dados.taxa_juros, 
-            periodo_anos=dados.periodo_anos
-        )
-        return {"resultado": resultado}
+    
+    resultado = calculadora_juros_compostos(
+        valor_inicial=dados.valor_inicial, 
+        aporte_mensal=dados.aporte_mensal, 
+        taxa_juros=dados.taxa_juros, 
+        periodo_anos=dados.periodo_anos
+    )
+    return {"resultado": resultado}
