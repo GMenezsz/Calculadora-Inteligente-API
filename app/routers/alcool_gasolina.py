@@ -10,8 +10,10 @@ class AlcoolGasolinaRequest(BaseModel):
 
 @router.post("/calculadora_alcool_gasolina")
 def api_alcool_gasolina(dados: AlcoolGasolinaRequest):
+    
     if validar_alcool(dados.valor_alcool) is not True:
         raise HTTPException(status_code=400, detail="Valores inválidos.")
+        
     if validar_gasolina(dados.valor_gasolina) is not True:
         raise HTTPException(status_code=400, detail="Valores inválidos.")
     
