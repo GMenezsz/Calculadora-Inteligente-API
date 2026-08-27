@@ -10,7 +10,10 @@ class GastosRequest(BaseModel):
 
 @router.post("/calculadora_gastos")
 def api_gastos(dados: GastosRequest):
-    if validar_salario(dados.salario_liquido) is not True or validar_gastos(dados.gastos_essenciais) is not True:
+    if validar_salario(dados.salario_liquido) is not True 
+        raise HTTPException(status_code=400, detail="Valores inválidos.")
+    
+    if validar_gastos(dados.gastos_essenciais) is not True:
         raise HTTPException(status_code=400, detail="Valores inválidos.")
 
     resultado = calcular_orcamento_50_30_20(dados.salario_liquido, dados.gastos_essenciais)
