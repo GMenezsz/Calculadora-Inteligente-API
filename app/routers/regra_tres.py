@@ -11,6 +11,7 @@ class RegraTresRequest(BaseModel):
 
 @router.post("/calculadora_regra_tres")
 def api_calculadora_regra_tres(dados: RegraTresRequest):
+    
     if validar_regra_tres(dados.valor1, dados.valor2, dados.valor3) is not True:
         raise HTTPException(status_code=400, detail="Valores inválidos.")
     else:
