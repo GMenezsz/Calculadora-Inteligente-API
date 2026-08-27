@@ -12,6 +12,7 @@ class EletrodomesticosRequest(BaseModel):
 
 @router.post("/calculadora_eletrodomesticos")
 def api_calculadora_eletrodomesticos(dados: EletrodomesticosRequest):
+    
     if validar_potencia(dados.potencia) is not True:
         raise HTTPException(status_code=400, detail="Valores inválidos.")
         
