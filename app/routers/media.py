@@ -13,19 +13,23 @@ class MediaRequest(BaseModel):
 
 @router.post("/calculadora_media")
 def api_calculadora_media(dados: MediaRequest):
+    
     if validar_parcial(dados.prova_parcial) is not True:
         raise HTTPException(status_code=400, detail="Valores inválidos.")
-    elif validar_global(dados.prova_global) is not True:
+        
+    if validar_global(dados.prova_global) is not True:
         raise HTTPException(status_code=400, detail="Valores inválidos.")
-    elif validar_trabalhos(dados.trabalhos) is not True:
+        
+    if validar_trabalhos(dados.trabalhos) is not True:
         raise HTTPException(status_code=400, detail="Valores inválidos.")
-    elif validar_pontos_extras(dados.pontos_extras) is not True:
+        
+    if validar_pontos_extras(dados.pontos_extras) is not True:
         raise HTTPException(status_code=400, detail="Valores inválidos.")
-    else:
-        resultado = calcular_media_ponderada(
-            prova_parcial=dados.prova_parcial, 
-            prova_global=dados.prova_global, 
-            trabalhos=dados.trabalhos, 
-            pontos_extras=dados.pontos_extras
-        )
-        return {"resultado": resultado}
+    
+    resultado = calcular_media_ponderada(
+        prova_parcial=dados.prova_parcial, 
+        prova_global=dados.prova_global, 
+        trabalhos=dados.trabalhos, 
+        pontos_extras=dados.pontos_extras
+    )
+    return {"resultado": resultado}
