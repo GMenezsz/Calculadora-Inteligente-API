@@ -13,6 +13,7 @@ class FinanciamentoRequest(BaseModel):
 
 @router.post("/calculadora_financiamento")
 def api_calculadora(dados: FinanciamentoRequest):
+    
     if validar_valor(dados.valor) is not True:
         raise HTTPException(status_code=400, detail="Valores inválidos.")
 
