@@ -8,3 +8,4 @@ from .calculadora_eletrodomesticos import *
 from .calculadora_autonomos import *
 from .calculadora_regra_tres import *
 from .calculadora_alcool_gasolina import *
+from .calculadora_caixa import*
