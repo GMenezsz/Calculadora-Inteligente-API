@@ -3,6 +3,7 @@ from pydantic import BaseModel
 from calculadora import *
 from typing import Optional
 
+router = APIRouter()
 
 class CaixaRequest(BaseModel):
     caixa: Optional[float] = None
