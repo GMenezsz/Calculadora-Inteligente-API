@@ -33,7 +33,7 @@ from app.routers.eletrodomesticos import router as router_eletrodomesticos
 from app.routers.autonomos import router as router_autonomos
 from app.routers.regra_tres import router as router_regra_tres
 from app.routers.alcool_gasolina import router as router_alcool_gasolina
-from app.router.caixa import router as router_caixa
+from app.routers.caixa import router as router_caixa
 
 app.include_router(router_gastos)
 app.include_router(router_media)
