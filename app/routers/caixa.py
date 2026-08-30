@@ -40,7 +40,7 @@ def api_calcular_caixa(dados: CaixaRequest):
         raise HTTPException(status_code=400, detail="A quantidade de notas de R$2,00 não pode ser 0 ou negativo. Deixe o campo vazio caso nao tenha notas de R$2,00.")
 
     if validar_notas1(dados.qtd_1) is not True:
-        raise HTTPException(status_code=400, detail="A quantidade de notas de R$1,00 não pode ser 0 ou negativo. Deixe o campo vazio caso nao tenha notas de R$1,00.")
+        raise HTTPException(status_code=400, detail="A quantidade de moedas de R$1,00 não pode ser 0 ou negativo. Deixe o campo vazio caso nao tenha moedas de R$1,00.")
 
     if validar_saida(dados.saida) is not True:
         raise HTTPException(status_code=400, detail="O valor de saída não pode ser negativo.")
