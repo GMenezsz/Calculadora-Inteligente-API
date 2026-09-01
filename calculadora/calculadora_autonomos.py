@@ -1,16 +1,19 @@
 from typing import List, Optional
 
 def calcular_custos(
-    horas_trabalho: float, 
-    valor_hora: float, 
-    margem_lucro: float, 
-    custos_operacionais: Optional[List[float]] = None, 
-    taxa_maquininha: Optional[float] = None, 
-    deslocamento: Optional[List[float]] = None, 
+    horas_trabalho: float,
+    valor_hora: float,
+    margem_lucro: float,
+    custos_operacionais: Optional[List[float]] = None,
+    taxa_maquininha: Optional[float] = None,
+    deslocamento: Optional[List[float]] = None,
     custo_insumos: Optional[List[float]] = None
 ):
     if margem_lucro < 0 or margem_lucro >= 100:
         raise ValueError("A margem de lucro deve ser entre 0 e 99.99%")
+
+    if taxa_maquininha is not None and (taxa_maquininha < 0 or taxa_maquininha >= 100):
+        raise ValueError("A taxa da maquininha deve ser entre 0 e 99.99%")
 
     if custos_operacionais is None:
         custos_operacionais = [0.0]
@@ -20,27 +23,41 @@ def calcular_custos(
         custo_insumos = [0.0]
     if taxa_maquininha is None:
         taxa_maquininha = 0.0
-        
+
     total_operacional = sum(custos_operacionais)
     total_deslocamento = sum(deslocamento)
     total_insumos = sum(custo_insumos)
-    total_mao_de_obra = horas_trabalho * valor_hora
 
-    custo_total = total_operacional + total_deslocamento + total_insumos + total_mao_de_obra
+    custo_material = total_operacional + total_deslocamento + total_insumos
+
+    mao_de_obra = horas_trabalho * valor_hora
+
+    base = custo_material + mao_de_obra
 
     fator_preco = 1 - (margem_lucro / 100) - (taxa_maquininha / 100)
-    
+
     if fator_preco <= 0:
-        raise ValueError(f"A combinação de margem de lucro ({margem_lucro}%) e taxa da maquininha ({taxa_maquininha}%) resulta em fator inválido")
-    
-    preco_sugerido = custo_total / fator_preco 
-    lucro = preco_sugerido * (margem_lucro / 100) 
+        raise ValueError(
+            f"A combinação de margem de lucro ({margem_lucro}%) e taxa da maquininha "
+            f"({taxa_maquininha}%) resulta em um preço inválido."
+        )
+
+    preco_sugerido = base / fator_preco
+    valor_maquininha = preco_sugerido * (taxa_maquininha / 100)
+    lucro_margem = preco_sugerido * (margem_lucro / 100)
+
+    ganho_total = mao_de_obra + lucro_margem
 
     return {
-        "custo_total_R$": round(custo_total, 2),
         "preco_sugerido_R$": round(preco_sugerido, 2),
-        "lucro_R$": round(lucro, 2),
+        "custo_material_R$": round(custo_material, 2),
+        "mao_de_obra_R$": round(mao_de_obra, 2),
+        "taxa_maquininha_R$": round(valor_maquininha, 2),
+        "lucro_R$": round(lucro_margem, 2),
+        "ganho_total_R$": round(ganho_total, 2),
     }
+
+
 def validar_horas_trabalho(horas_trabalho: float):
     if horas_trabalho < 0:
         return False
@@ -54,7 +71,7 @@ def validar_valor_hora(valor_hora: float):
         return True
 
 def validar_margem_lucro(margem_lucro: float):
-    if margem_lucro < 0:
+    if margem_lucro < 0 or margem_lucro >= 100:
         return False
     else:
         return True
@@ -66,7 +83,7 @@ def validar_deslocamento(deslocamento: Optional[List[float]]) -> bool:
         if custo < 0:
             return False
     return True
-    
+
 
 def validar_custo_insumos(custo_insumos: Optional[List[float]]) -> bool:
     if custo_insumos is None or not custo_insumos:
@@ -87,6 +104,6 @@ def validar_custos_operacionais(custos_operacionais: Optional[List[float]]) -> b
 def validar_taxa_maquininha(taxa_maquininha: Optional[float]) -> bool:
     if taxa_maquininha is None:
         return True
-    if taxa_maquininha < 0:
+    if taxa_maquininha < 0 or taxa_maquininha >= 100:
         return False
     return True
