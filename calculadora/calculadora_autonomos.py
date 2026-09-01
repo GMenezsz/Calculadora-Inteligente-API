@@ -28,11 +28,14 @@ def calcular_custos(
     total_deslocamento = sum(deslocamento)
     total_insumos = sum(custo_insumos)
 
-    custo_material = total_operacional + total_deslocamento + total_insumos
+    # Custo com insumos (materiais/produtos usados no serviço)
+    custo_insumos_total = total_insumos
 
+    # Quanto você quer receber pelo seu tempo
     mao_de_obra = horas_trabalho * valor_hora
 
-    base = custo_material + mao_de_obra
+    # Preço precisa cobrir: operacional + insumos + deslocamento + sua hora de trabalho
+    base = total_operacional + custo_insumos_total + total_deslocamento + mao_de_obra
 
     fator_preco = 1 - (margem_lucro / 100) - (taxa_maquininha / 100)
 
@@ -46,11 +49,14 @@ def calcular_custos(
     valor_maquininha = preco_sugerido * (taxa_maquininha / 100)
     lucro_margem = preco_sugerido * (margem_lucro / 100)
 
+    # O que você realmente embolsa no fim: sua hora trabalhada + a margem de lucro do negócio
     ganho_total = mao_de_obra + lucro_margem
 
     return {
         "preco_sugerido_R$": round(preco_sugerido, 2),
-        "custo_material_R$": round(custo_material, 2),
+        "custo_operacional_R$": round(total_operacional, 2),
+        "custo_material_R$": round(custo_insumos_total, 2),
+        "deslocamento_R$": round(total_deslocamento, 2),
         "mao_de_obra_R$": round(mao_de_obra, 2),
         "taxa_maquininha_R$": round(valor_maquininha, 2),
         "lucro_R$": round(lucro_margem, 2),
