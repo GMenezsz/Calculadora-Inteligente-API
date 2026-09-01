@@ -18,6 +18,7 @@ class CaixaRequest(BaseModel):
 
 @router.post("/calculadora_caixa")
 def api_calcular_caixa(dados: CaixaRequest):
+    
     if validar_caixa(dados.caixa) is not True:
         raise HTTPException(status_code=400, detail="O valor do caixa nao pode ser negativo.")
 
