@@ -1,35 +1,46 @@
 from typing import List, Optional
 
-def calcular_preco_simples(
-    horas_trabalho: float,
-    valor_hora: float,
-    margem_lucro: float,
-    custos_operacionais: Optional[List[float]] = None,
-    deslocamento: Optional[List[float]] = None,
+def calcular_custos(
+    horas_trabalho: float, 
+    valor_hora: float, 
+    margem_lucro: float, 
+    custos_operacionais: Optional[List[float]] = None, 
+    taxa_maquininha: Optional[float] = None, 
+    deslocamento: Optional[List[float]] = None, 
     custo_insumos: Optional[List[float]] = None
 ):
+    if margem_lucro < 0 or margem_lucro >= 100:
+        raise ValueError("A margem de lucro deve ser entre 0 e 99.99%")
 
-    total_operacional = sum(custos_operacionais or [0])
-    total_deslocamento = sum(deslocamento or [0])
-    total_insumos = sum(custo_insumos or [0])
+    if custos_operacionais is None:
+        custos_operacionais = [0.0]
+    if deslocamento is None:
+        deslocamento = [0.0]
+    if custo_insumos is None:
+        custo_insumos = [0.0]
+    if taxa_maquininha is None:
+        taxa_maquininha = 0.0
+        
+    total_operacional = sum(custos_operacionais)
+    total_deslocamento = sum(deslocamento)
+    total_insumos = sum(custo_insumos)
+    total_mao_de_obra = horas_trabalho * valor_hora
+
+    custo_total = total_operacional + total_deslocamento + total_insumos + total_mao_de_obra
+
+    fator_preco = 1 - (margem_lucro / 100) - (taxa_maquininha / 100)
     
-    custo_material = total_operacional + total_deslocamento + total_insumos
+    if fator_preco <= 0:
+        raise ValueError(f"A combinação de margem de lucro ({margem_lucro}%) e taxa da maquininha ({taxa_maquininha}%) resulta em fator inválido")
     
-  
-    remuneracao = horas_trabalho * valor_hora
-    
-   
-    lucro = custo_material * (margem_lucro / 100)
-    
-    preco = remuneracao + custo_material + lucro
-    
+    preco_sugerido = custo_total / fator_preco 
+    lucro = preco_sugerido * (margem_lucro / 100) 
+
     return {
-        "remuneracao_R$": round(remuneracao, 2),
-        "custo_material_R$": round(custo_material, 2),
+        "custo_total_R$": round(custo_total, 2),
+        "preco_sugerido_R$": round(preco_sugerido, 2),
         "lucro_R$": round(lucro, 2),
-        "preco_sugerido_R$": round(preco, 2)
     }
-
 def validar_horas_trabalho(horas_trabalho: float):
     if horas_trabalho < 0:
         return False
