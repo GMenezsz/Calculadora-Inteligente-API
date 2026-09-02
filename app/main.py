@@ -34,6 +34,7 @@ from app.routers.autonomos import router as router_autonomos
 from app.routers.regra_tres import router as router_regra_tres
 from app.routers.alcool_gasolina import router as router_alcool_gasolina
 from app.routers.caixa import router as router_caixa
+from app.routers.impressao_3d import router as router_impressao_3d
 
 app.include_router(router_gastos)
 app.include_router(router_media)
