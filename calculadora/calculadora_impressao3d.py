@@ -94,6 +94,8 @@ def validar_custo_maquina(custo_maquina):
 def validar_margem_lucro(lucro: Optional[float]):
     if lucro < 0 or lucro >= 100:
         return False
+    elif lucro is None:
+        return True
     else:
         return True
 
