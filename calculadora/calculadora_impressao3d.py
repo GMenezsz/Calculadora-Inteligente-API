@@ -76,7 +76,7 @@ def validar_tempo_impressao(tempo_impressao: str):
       return False
     
   except (ValueError, IndexError):
-    raise ValueError("Formato de tempo inválido. Use o formato HH:MM (ex: 02:46).")
+    return False
   return True
 
 def validar_custo_energia(custo_energia):
