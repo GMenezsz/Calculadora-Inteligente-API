@@ -1,9 +1,9 @@
-def calcular_gastos(potencia: int, horas_uso: float, dias_uso: int, valor_kwh: float):
+def calcular_gastos(potencia: int, horas_uso: str, dias_uso: int, valor_kwh: float):
 
-    horas = int(horas_uso)
-    minutos = int((horas_uso - horas) * 60)
+    horas, minutos = map(int, horas_uso.split(":"))
+    horas_decimal = horas + (minutos / 60)
 
-    consumo_kwh = (potencia * horas_uso * dias_uso) / 1000
+    consumo_kwh = (potencia * horas_decimal * dias_uso) / 1000
     custo_total = consumo_kwh * valor_kwh
 
     return {
@@ -20,11 +20,14 @@ def validar_potencia(potencia: int):
     else:
         return True
 
-def validar_horas_uso(horas_uso: float):
-    if horas_uso < 0:
+def validar_horas_uso(horas_uso: str):
+    try:
+        horas, minutos = map(int, horas_uso.split(":"))
+        if horas < 0 or minutos < 0 or minutos >= 60:
+            return False
+    except (ValueError, AttributeError):
         return False
-    else:
-        return True
+    return True
 
 def validar_dias_uso(dias_uso: int):
     if dias_uso < 0:
