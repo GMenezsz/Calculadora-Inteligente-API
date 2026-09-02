@@ -20,6 +20,9 @@ def calcular_custos_impressao(
     if deslocamento_entrega is None:
         deslocamento_entrega = 0.0
 
+    if margem_lucro_percentual is None:
+        margem_lucro_percentual = 0.0
+
     horas, minutos = map(int, tempo_impressao.split(":"))
     hora_decimal = horas + (minutos / 60)
 
