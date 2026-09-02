@@ -47,6 +47,7 @@ app.include_router(router_autonomos)
 app.include_router(router_regra_tres)
 app.include_router(router_alcool_gasolina)
 app.include_router(router_caixa)
+app.include_router(router_impressao_3d)
 
 @app.api_route("/health", methods=["GET", "HEAD"])
 def health_check():
