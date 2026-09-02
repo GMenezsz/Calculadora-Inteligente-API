@@ -9,3 +9,4 @@ from .calculadora_autonomos import *
 from .calculadora_regra_tres import *
 from .calculadora_alcool_gasolina import *
 from .calculadora_caixa import*
+from .calculadora_impressao3d import *
