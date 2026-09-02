@@ -73,7 +73,7 @@ def validar_tempo_impressao(tempo_impressao: str):
     horas, minutos = map(int, tempo_impressao.split(":"))
 
     if horas < 0 or minutos < 0 or minutos >= 60:
-      raise ValueError
+      return False
     
   except (ValueError, IndexError):
     raise ValueError("Formato de tempo inválido. Use o formato HH:MM (ex: 02:46).")
