@@ -11,7 +11,7 @@ class ImpressaoRequest(BaseModel):
         tempo_impressao: str
         custo_energia: float
         custo_maquina: float
-        margem_lucro_percentual: float
+        margem_lucro_percentual: Optional[float] = None
         insumos: Optional[list[float]] = None
         taxa_maquininha: Optional[float] = None
         deslocamento_entrega: Optional[float] = None
