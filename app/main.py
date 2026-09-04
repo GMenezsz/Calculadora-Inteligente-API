@@ -1,5 +1,6 @@
 from fastapi import FastAPI, Request, Response
 from fastapi.middleware.cors import CORSMiddleware
+from fastapi.responses import JSONResponse
 
 app = FastAPI(title="Calculadora Inteligente")
 
@@ -16,8 +17,14 @@ async def add_cors_headers(request: Request, call_next):
     if request.method == "OPTIONS":
         response = Response(status_code=200)
     else:
-        response = await call_next(request)
-    
+        try:
+            response = await call_next(request)
+        except Exception:
+            response = JSONResponse(
+                status_code=500,
+                content={"detail": "Erro interno no servidor."},
+            )
+
     response.headers["Access-Control-Allow-Origin"] = "*"
     response.headers["Access-Control-Allow-Methods"] = "*"
     response.headers["Access-Control-Allow-Headers"] = "*"
