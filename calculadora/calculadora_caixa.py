@@ -118,7 +118,7 @@ def validar_notas1(qtd_1: Optional[int]):
 def validar_saida(saida: Optional[float]):
     if saida is None:
         return True
-    elif saida <= 0:
+    elif saida < 0:
         return False
     else:
         return True
